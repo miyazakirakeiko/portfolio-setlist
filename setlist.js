@@ -1,14 +1,23 @@
+// 空の配列 setlist を定義しています。この配列には、追加される曲やMCが格納されます。
 const setlist = [];
+// カラーテーマの反転を制御するためのフラグです。false の場合は通常の色、true の場合は反転した色（背景が黒、文字が黄色）になります。
 let invertColors = false;
+
+// ドラッグ中のインデックスを保存する変数
+let draggedItemIndex = null;
+
+document.getElementById("date-input").addEventListener("change", function () {
+  // 日付を選択した後にカレンダーを閉じる
+  //  change イベントを使って、日付選択後に blur() メソッドを呼び出し、フォーカスを外す
+  this.blur();
+});
 
 function addSong() {
   const songInput = document.getElementById("song-input");
   const song = songInput.value.trim();
-  if (song && setlist.length < 20) {
-    setlist.push({ type: "song", name: song });
-    updateSetlist();
-    songInput.value = "";
-  }
+  setlist.push({ type: "song", name: song });
+  updateSetlist();
+  songInput.value = "";
 }
 
 function addMC() {
@@ -23,6 +32,46 @@ function deleteItem(index) {
   updateSetlist();
 }
 
+// 曲の順番をドラッグアンドドロップで入れ替えるためのイベントリスナー
+function addDragAndDropListeners() {
+  const listItems = document.querySelectorAll("#setlist li");
+
+  listItems.forEach((item, index) => {
+    item.setAttribute("draggable", true);
+
+    // ドラッグ開始
+    item.addEventListener("dragstart", function () {
+      draggedItemIndex = index;
+    });
+
+    // ドラッグしている要素が上に来たときに、デフォルトの動作を無効化
+    item.addEventListener("dragover", function (event) {
+      event.preventDefault(); // ドロップを可能にするための必須処理
+    });
+
+    // ドロップされたときに処理を実行
+    item.addEventListener("drop", function () {
+      if (draggedItemIndex !== null) {
+        // ドラッグされた要素を現在の位置に挿入
+        const draggedItem = setlist[draggedItemIndex];
+
+        // 元の位置から削除
+        setlist.splice(draggedItemIndex, 1);
+
+        // 新しい位置に挿入
+        setlist.splice(index, 0, draggedItem);
+
+        // リストを再描画
+        updateSetlist();
+
+        // ドラッグが完了したのでリセット
+        draggedItemIndex = null;
+      }
+    });
+  });
+}
+
+// セットリストの内容を更新する関数
 function updateSetlist() {
   const ul = document.getElementById("setlist");
   ul.innerHTML = "";
@@ -41,6 +90,9 @@ function updateSetlist() {
     li.appendChild(deleteButton);
     ul.appendChild(li);
   });
+
+  // ドラッグ＆ドロップのイベントリスナーを追加
+  addDragAndDropListeners();
 }
 
 function getFontSizeForPDF(totalSongs) {
@@ -155,5 +207,5 @@ document
   .getElementById("generate-pdf-button")
   .addEventListener("click", generatePDF);
 document
-  .getElementById("toggle-invert-button")
+  .getElementById("invert-colors-button")
   .addEventListener("click", toggleInvert);

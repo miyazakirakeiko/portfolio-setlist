@@ -9,16 +9,19 @@
   <body>
     <h1>セットリスト作ろうくん</h1>
 
-    <!-- バンド名、イベント名、日付、会場名の入力 -->
+    <!-- バンド名、イベント名、日付、会場名の入力　バンド名、イベント名、日付、会場名を入力するためのフィールドをまとめたセクション -->
+    <!-- placeholderは何も入力されていない場合に表示されるテキスト -->
     <div id="band-info">
       <input type="text" id="band-name" placeholder="バンド名を入力" />
       <input type="text" id="event-name" placeholder="イベント名を入力" />
-      <input type="text" id="date-input" placeholder="日付を入力" />
+      <!-- 日付のみinputはtextでなくdate -->
+      <input type="date" id="date-input" placeholder="日付を入力" />
       <input type="text" id="venue-name" placeholder="会場名を入力" />
     </div>
 
     <!-- 曲名とMCの追加 -->
     <div id="setlist-form">
+      <!-- 曲名やMCの入力と追加ボタンが含まれたフォーム -->
       <input type="text" id="song-input" placeholder="曲名を入力" />
       <button onclick="addSong()">曲を追加</button>
       <button onclick="addMC()">MCを追加</button>
@@ -33,12 +36,13 @@
     <button onclick="toggleInvert()">白黒反転</button>
 
     <!-- プレビューエリア -->
+    <!-- レビューの内容が表示されるエリア。初期状態ではstyle="display: none"により非表示になっているがプレビューボタンが押されると表示 -->
     <div id="preview-area" style="display: none">
       <h2>プレビュー</h2>
       <div id="preview-content" style="padding: 10px"></div>
     </div>
 
-    <!-- html2pdf.jsライブラリの読み込み -->
+    <!-- html2pdf.jsライブラリの読み込み　外部JavaScriptファイルsetlist.jsを読み込んでいます。このファイルには、セットリストの操作やプレビュー、PDF生成などの機能を持つスクリプトが含まれる -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
     <!-- setlist.jsファイルを読み込む -->
     <script src="setlist.js"></script>
