@@ -1,0 +1,24 @@
+/* ul全体のスタイル */
+ul#setlist {
+  list-style-type: none; /* 番号やマーカーを非表示に */
+  padding: 0;
+  margin: 0;
+}
+
+/* li要素のスタイル */
+ul#setlist li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd; /* 下線（仕切り線）を追加 */
+  cursor: move; /* ドラッグ可能であることを示す */
+  transition: background-color 0.3s ease; /* 背景色のスムーズな変化 */
+}
+
+/* ドラッグした際にhoverエフェクトを出す */
+ul#setlist li.dragging {
+  background-color: #f0f0f0; /* ドラッグ中の背景色 */
+}
+
+/* ドラッグ先にドロップ可能な場所を強調 */
+ul#setlist li.hovered {
+  border: 2px dashed #007bff; /* ドラッグ先の枠線の色を変更 */
+}

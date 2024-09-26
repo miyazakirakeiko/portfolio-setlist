@@ -8,7 +8,6 @@ let draggedItemIndex = null;
 
 document.getElementById("date-input").addEventListener("change", function () {
   // 日付を選択した後にカレンダーを閉じる
-  //  change イベントを使って、日付選択後に blur() メソッドを呼び出し、フォーカスを外す
   this.blur();
 });
 
@@ -84,6 +83,8 @@ function updateSetlist() {
       li.textContent = item.name;
     }
     li.style.textAlign = "left";
+    li.style.color = invertColors ? "yellow" : "black"; // 文字色の設定
+    li.style.backgroundColor = invertColors ? "black" : "white"; // 背景色の設定
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "削除";
     deleteButton.onclick = () => deleteItem(index);
@@ -106,6 +107,15 @@ function getFontSizeForPDF(totalSongs) {
 function showPreview() {
   const bandName =
     document.getElementById("band-name").value.trim() || "バンド名未入力";
+
+  // バンド名の文字数に応じたフォントサイズの設定
+  let bandNameFontSize = "48px";
+  if (bandName.length >= 16) {
+    bandNameFontSize = "35px";
+  } else if (bandName.length >= 11) {
+    bandNameFontSize = "40px";
+  }
+
   const eventName =
     document.getElementById("event-name").value.trim() || "イベント名未入力";
   const inputDate =
@@ -115,10 +125,12 @@ function showPreview() {
 
   let songNumber = 1;
   const previewContent = `
-        <div style="padding: 10px; ${
-          invertColors ? "background-color: black; color: yellow;" : ""
-        }">
-            <h3 style="font-size: 48px; text-align: center;">${bandName}</h3>
+        <div style="width: 210mm; height: 297mm; padding: 10px; ${
+          invertColors
+            ? "background-color: black; color: yellow;"
+            : "background-color: white; color: black;"
+        }; margin-left: 0; border: 1px solid #ccc;">  <!-- A4比率、左寄せ設定 -->
+            <h3 style="font-size: ${bandNameFontSize}; text-align: center;">${bandName}</h3>
             <p style="font-size: 15px; text-align: center; margin-bottom: 10px;">${inputDate}</p>
             <p style="font-size: 15px; text-align: center; margin-bottom: 10px;">${venueName}</p>
             <p style="font-size: 15px; text-align: center; margin-bottom: 10px;">${eventName}</p>
@@ -126,11 +138,19 @@ function showPreview() {
                 ${setlist
                   .map((item) => {
                     if (item.type === "song") {
-                      return `<li style="font-size: 30px; text-align: left; white-space: normal; overflow: hidden; text-overflow: ellipsis;">
+                      return `<li style="font-size: 30px; text-align: left; white-space: normal; overflow: hidden; text-overflow: ellipsis; ${
+                        invertColors
+                          ? "color: yellow; background-color: black;"
+                          : "color: black; background-color: white;"
+                      }">
                             ${songNumber++}. ${item.name}
                         </li>`;
                     } else {
-                      return `<li style="font-size: 30px; text-align: left; white-space: normal; overflow: hidden; text-overflow: ellipsis;">
+                      return `<li style="font-size: 30px; text-align: left; white-space: normal; overflow: hidden; text-overflow: ellipsis; ${
+                        invertColors
+                          ? "color: yellow; background-color: black;"
+                          : "color: black; background-color: white;"
+                      }">
                             ${item.name}
                         </li>`;
                     }
@@ -139,8 +159,12 @@ function showPreview() {
             </ul>
         </div>`;
 
+  // プレビューエリアに出力
   document.getElementById("preview-content").innerHTML = previewContent;
   document.getElementById("preview-area").style.display = "block";
+
+  // プレビューエリア自体を左寄せに設定
+  document.getElementById("preview-area").style.textAlign = "left";
 }
 
 function generatePDF() {
@@ -156,24 +180,41 @@ function generatePDF() {
   const totalSongs = setlist.filter((item) => item.type === "song").length;
   const fontSize = getFontSizeForPDF(totalSongs);
 
+  let bandNameFontSize = "48px";
+  if (bandName.length >= 16) {
+    bandNameFontSize = "35px";
+  } else if (bandName.length >= 11) {
+    bandNameFontSize = "40px";
+  }
+
   let songNumber = 1;
   const pdfContent = `
-        <div style="text-align: center; padding: 20px; ${
-          invertColors ? "background-color: black; color: yellow;" : ""
+        <div style="text-align: left; font-family: Arial, sans-serif; ${
+          invertColors
+            ? "background-color: black; color: yellow;"
+            : "background-color: white; color: black;"
         }">
-            <h1 style="font-size: 48px;">${bandName}</h1>
-            <p style="font-size: 15px; margin-bottom: 10px;">${inputDate}</p>
-            <p style="font-size: 15px; margin-bottom: 10px;">${venueName}</p>
-            <p style="font-size: 15px; margin-bottom: 10px;">${eventName}</p>
+            <h3 style="font-size: ${bandNameFontSize}; text-align: center;">${bandName}</h3>
+            <p style="font-size: 15px; text-align: center; margin-bottom: 10px;">${inputDate}</p>
+            <p style="font-size: 15px; text-align: center; margin-bottom: 10px;">${venueName}</p>
+            <p style="font-size: 15px; text-align: center; margin-bottom: 10px;">${eventName}</p>
             <ul style="list-style-type: none; padding: 0;">
                 ${setlist
                   .map((item) => {
                     if (item.type === "song") {
-                      return `<li style="font-size: ${fontSize}; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                      return `<li style="font-size: ${fontSize}; text-align: left; white-space: normal; overflow: hidden; text-overflow: ellipsis; ${
+                        invertColors
+                          ? "color: yellow; background-color: black;"
+                          : "color: black; background-color: white;"
+                      }">
                             ${songNumber++}. ${item.name}
                         </li>`;
                     } else {
-                      return `<li style="font-size: ${fontSize}; text-align: left; white-space: normal; overflow: hidden; text-overflow: ellipsis;">
+                      return `<li style="font-size: ${fontSize}; text-align: left; white-space: normal; overflow: hidden; text-overflow: ellipsis; ${
+                        invertColors
+                          ? "color: yellow; background-color: black;"
+                          : "color: black; background-color: white;"
+                      }">
                             ${item.name}
                         </li>`;
                     }
@@ -182,30 +223,25 @@ function generatePDF() {
             </ul>
         </div>`;
 
-  const opt = {
-    margin: [20, 20, 20, 20],
-    filename: `${bandName}_セットリスト.pdf`,
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-  };
+  // html2pdf.jsを使用してPDFを生成
+  const element = document.createElement("div");
+  element.innerHTML = pdfContent;
+  document.body.appendChild(element);
 
-  html2pdf().from(pdfContent).set(opt).save();
+  html2pdf()
+    .from(element)
+    .toPdf()
+    .get("pdf")
+    .then((pdf) => {
+      pdf.autoPrint();
+      window.open(pdf.output("bloburl"), "_blank");
+    });
+
+  document.body.removeChild(element);
 }
 
 function toggleInvert() {
   invertColors = !invertColors;
-  showPreview();
+  updateSetlist(); // セットリストを再描画して色を反映
+  showPreview(); // プレビューを再表示して色を反映
 }
-
-document.getElementById("add-song-button").addEventListener("click", addSong);
-document.getElementById("add-mc-button").addEventListener("click", addMC);
-document
-  .getElementById("preview-button")
-  .addEventListener("click", showPreview);
-document
-  .getElementById("generate-pdf-button")
-  .addEventListener("click", generatePDF);
-document
-  .getElementById("invert-colors-button")
-  .addEventListener("click", toggleInvert);
