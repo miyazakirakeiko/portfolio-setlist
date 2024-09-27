@@ -180,41 +180,24 @@ function generatePDF() {
   const totalSongs = setlist.filter((item) => item.type === "song").length;
   const fontSize = getFontSizeForPDF(totalSongs);
 
-  let bandNameFontSize = "48px";
-  if (bandName.length >= 16) {
-    bandNameFontSize = "35px";
-  } else if (bandName.length >= 11) {
-    bandNameFontSize = "40px";
-  }
-
   let songNumber = 1;
   const pdfContent = `
-        <div style="text-align: left; font-family: 'Noto Sans', sans-serif; ${
-          invertColors
-            ? "background-color: black; color: yellow;"
-            : "background-color: white; color: black;"
+        <div style="text-align: center; padding: 20px; ${
+          invertColors ? "background-color: black; color: yellow;" : ""
         }">
-            <h3 style="font-size: ${bandNameFontSize}; text-align: center;">${bandName}</h3>
-            <p style="font-size: 15px; text-align: center; margin-bottom: 10px;">${inputDate}</p>
-            <p style="font-size: 15px; text-align: center; margin-bottom: 10px;">${venueName}</p>
-            <p style="font-size: 15px; text-align: center; margin-bottom: 10px;">${eventName}</p>
+            <h1 style="font-size: 48px;">${bandName}</h1>
+            <p style="font-size: 15px; margin-bottom: 10px;">${inputDate}</p>
+            <p style="font-size: 15px; margin-bottom: 10px;">${venueName}</p>
+            <p style="font-size: 15px; margin-bottom: 10px;">${eventName}</p>
             <ul style="list-style-type: none; padding: 0;">
                 ${setlist
                   .map((item) => {
                     if (item.type === "song") {
-                      return `<li style="font-size: ${fontSize}; text-align: left; white-space: normal; overflow: hidden; text-overflow: ellipsis; ${
-                        invertColors
-                          ? "color: yellow; background-color: black;"
-                          : "color: black; background-color: white;"
-                      }">
+                      return `<li style="font-size: ${fontSize}; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                             ${songNumber++}. ${item.name}
                         </li>`;
                     } else {
-                      return `<li style="font-size: ${fontSize}; text-align: left; white-space: normal; overflow: hidden; text-overflow: ellipsis; ${
-                        invertColors
-                          ? "color: yellow; background-color: black;"
-                          : "color: black; background-color: white;"
-                      }">
+                      return `<li style="font-size: ${fontSize}; text-align: left; white-space: normal; overflow: hidden; text-overflow: ellipsis;">
                             ${item.name}
                         </li>`;
                     }
@@ -223,25 +206,15 @@ function generatePDF() {
             </ul>
         </div>`;
 
-  const element = document.createElement("div");
-  element.innerHTML = pdfContent;
-  document.body.appendChild(element);
+  const opt = {
+    margin: [20, 20, 20, 20],
+    filename: `${bandName}_セットリスト.pdf`,
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+  };
 
-  html2pdf()
-    .from(element)
-    .toPdf()
-    .get("pdf")
-    .then((pdf) => {
-      pdf.autoPrint();
-      window.open(pdf.output("bloburl"), "_blank");
-    })
-    .catch((error) => {
-      console.error("PDF生成中にエラーが発生しました:", error);
-      alert("PDFの生成中にエラーが発生しました。");
-    })
-    .finally(() => {
-      document.body.removeChild(element);
-    });
+  html2pdf().from(pdfContent).set(opt).save();
 }
 
 function toggleInvert() {
