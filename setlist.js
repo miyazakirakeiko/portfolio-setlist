@@ -189,7 +189,7 @@ function generatePDF() {
 
   let songNumber = 1;
   const pdfContent = `
-        <div style="text-align: left; font-family: Arial, sans-serif; ${
+        <div style="text-align: left; font-family: 'Noto Sans', sans-serif; ${
           invertColors
             ? "background-color: black; color: yellow;"
             : "background-color: white; color: black;"
@@ -223,7 +223,6 @@ function generatePDF() {
             </ul>
         </div>`;
 
-  // html2pdf.jsを使用してPDFを生成
   const element = document.createElement("div");
   element.innerHTML = pdfContent;
   document.body.appendChild(element);
@@ -235,9 +234,14 @@ function generatePDF() {
     .then((pdf) => {
       pdf.autoPrint();
       window.open(pdf.output("bloburl"), "_blank");
+    })
+    .catch((error) => {
+      console.error("PDF生成中にエラーが発生しました:", error);
+      alert("PDFの生成中にエラーが発生しました。");
+    })
+    .finally(() => {
+      document.body.removeChild(element);
     });
-
-  document.body.removeChild(element);
 }
 
 function toggleInvert() {

@@ -4,8 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>セットリスト作ろうくん</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;500&display=swap"
+    />
+
     <link rel="stylesheet" href="styles.css" />
   </head>
+
   <body>
     <h1>セットリスト作ろうくん ver.2.0</h1>
 
@@ -14,8 +24,10 @@
     <div id="band-info">
       <input type="text" id="band-name" placeholder="バンド名を入力" />
       <input type="text" id="event-name" placeholder="イベント名を入力" />
+
+      <label for="date-input">📅</label>
       <!-- 日付のみinputはtextでなくdate -->
-      <input type="date" id="date-input" placeholder="日付を入力" />
+      <input type="date" id="date-input" />
       <input type="text" id="venue-name" placeholder="会場名を入力" />
     </div>
 
