@@ -1,13 +1,12 @@
 // 空の配列 setlist を定義しています。この配列には、追加される曲やMCが格納されます。
 const setlist = [];
-// カラーテーマの反転を制御するためのフラグです。false の場合は通常の色、true の場合は反転した色（背景が黒、文字が黄色）になります。
+// カラーテーマの反転を制御するためのフラグです。false の場合は通常の色、true の場合は反転した色（背景が黒、文字が白）になります。
 let invertColors = false;
 
 // ドラッグ中のインデックスを保存する変数
 let draggedItemIndex = null;
 
 document.getElementById("date-input").addEventListener("change", function () {
-  // 日付を選択した後にカレンダーを閉じる
   this.blur();
 });
 
@@ -31,69 +30,58 @@ function deleteItem(index) {
   updateSetlist();
 }
 
-// 曲の順番をドラッグアンドドロップで入れ替えるためのイベントリスナー
-function addDragAndDropListeners() {
-  const listItems = document.querySelectorAll("#setlist li");
-
-  listItems.forEach((item, index) => {
-    item.setAttribute("draggable", true);
-
-    // ドラッグ開始
-    item.addEventListener("dragstart", function () {
-      draggedItemIndex = index;
-    });
-
-    // ドラッグしている要素が上に来たときに、デフォルトの動作を無効化
-    item.addEventListener("dragover", function (event) {
-      event.preventDefault(); // ドロップを可能にするための必須処理
-    });
-
-    // ドロップされたときに処理を実行
-    item.addEventListener("drop", function () {
-      if (draggedItemIndex !== null) {
-        // ドラッグされた要素を現在の位置に挿入
-        const draggedItem = setlist[draggedItemIndex];
-
-        // 元の位置から削除
-        setlist.splice(draggedItemIndex, 1);
-
-        // 新しい位置に挿入
-        setlist.splice(index, 0, draggedItem);
-
-        // リストを再描画
-        updateSetlist();
-
-        // ドラッグが完了したのでリセット
-        draggedItemIndex = null;
-      }
-    });
-  });
-}
-
 // セットリストの内容を更新する関数
 function updateSetlist() {
-  const ul = document.getElementById("setlist");
-  ul.innerHTML = "";
-  let songNumber = 1;
+  const setlistContainer = document.getElementById("setlist");
+  setlistContainer.innerHTML = ""; // 既存のリストをクリア
+
+  // 曲順の番号を管理するためのカウンタ
+  let songCounter = 1;
+
   setlist.forEach((item, index) => {
-    const li = document.createElement("li");
+    const listItem = document.createElement("li");
+
+    // Tailwind CSSクラスを使用してスタイルを設定
+    listItem.className = `
+      border border-gray-300 
+      rounded-md 
+      p-2 
+      my-1 
+      transition 
+      duration-200 
+      ease-in-out 
+      hover:shadow-md 
+      ${invertColors ? "bg-gray-800 text-white" : "bg-white text-black"}
+    `;
+
     if (item.type === "song") {
-      li.textContent = `${songNumber++}. ${item.name}`;
+      listItem.textContent = `${songCounter}. ${item.name}`;
+      songCounter++; // 曲ごとにカウンタを増やす
     } else {
-      li.textContent = item.name;
+      listItem.textContent = item.name; // MCの場合はそのまま
     }
-    li.style.textAlign = "left";
-    li.style.color = invertColors ? "yellow" : "black"; // 文字色の設定
-    li.style.backgroundColor = invertColors ? "black" : "white"; // 背景色の設定
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "削除";
-    deleteButton.onclick = () => deleteItem(index);
-    li.appendChild(deleteButton);
-    ul.appendChild(li);
+
+    // 曲がMCでない場合は削除ボタンを追加
+    if (item.type === "song") {
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "削除";
+      deleteButton.className = "ml-2 text-red-500 hover:text-red-700";
+      deleteButton.addEventListener("click", () => deleteItem(index)); // indexで削除
+      listItem.appendChild(deleteButton);
+    }
+
+    setlistContainer.appendChild(listItem);
   });
 
-  // ドラッグ＆ドロップのイベントリスナーを追加
-  addDragAndDropListeners();
+  // SortableJSを初期化
+  new Sortable(setlistContainer, {
+    animation: 150,
+    onEnd: function (evt) {
+      const movedItem = setlist.splice(evt.oldIndex, 1)[0];
+      setlist.splice(evt.newIndex, 0, movedItem);
+      updateSetlist(); // リストを再描画
+    },
+  });
 }
 
 function getFontSizeForPDF(totalSongs) {
@@ -108,12 +96,11 @@ function showPreview() {
   const bandName =
     document.getElementById("band-name").value.trim() || "バンド名未入力";
 
-  // バンド名の文字数に応じたフォントサイズの設定
-  let bandNameFontSize = "48px";
+  let bandNameFontSize = "24px"; // 元は48px
   if (bandName.length >= 16) {
-    bandNameFontSize = "35px";
+    bandNameFontSize = "17.5px"; // 元は35px
   } else if (bandName.length >= 11) {
-    bandNameFontSize = "40px";
+    bandNameFontSize = "20px"; // 元は40px
   }
 
   const eventName =
@@ -125,20 +112,20 @@ function showPreview() {
 
   let songNumber = 1;
   const previewContent = `
-        <div style="width: 210mm; height: 297mm; padding: 10px; ${
+        <div style="width: 105mm; height: 149mm; padding: 10px; ${
           invertColors
             ? "background-color: black; color: yellow;"
             : "background-color: white; color: black;"
-        }; margin-left: 0; border: 1px solid #ccc;">  <!-- A4比率、左寄せ設定 -->
+        }; margin: auto; border: 1px solid #ccc;">
             <h3 style="font-size: ${bandNameFontSize}; text-align: center;">${bandName}</h3>
-            <p style="font-size: 15px; text-align: center; margin-bottom: 10px;">${inputDate}</p>
-            <p style="font-size: 15px; text-align: center; margin-bottom: 10px;">${venueName}</p>
-            <p style="font-size: 15px; text-align: center; margin-bottom: 10px;">${eventName}</p>
+            <p style="font-size: 7.5px; text-align: center; margin-bottom: 10px;">${inputDate}</p>
+            <p style="font-size: 7.5px; text-align: center; margin-bottom: 10px;">${venueName}</p>
+            <p style="font-size: 7.5px; text-align: center; margin-bottom: 10px;">${eventName}</p>
             <ul style="list-style-type: none; padding: 0;">
                 ${setlist
                   .map((item) => {
                     if (item.type === "song") {
-                      return `<li style="font-size: 30px; text-align: left; white-space: normal; overflow: hidden; text-overflow: ellipsis; ${
+                      return `<li style="font-size: 15px; text-align: left; white-space: normal; overflow: hidden; text-overflow: ellipsis; ${
                         invertColors
                           ? "color: yellow; background-color: black;"
                           : "color: black; background-color: white;"
@@ -146,7 +133,7 @@ function showPreview() {
                             ${songNumber++}. ${item.name}
                         </li>`;
                     } else {
-                      return `<li style="font-size: 30px; text-align: left; white-space: normal; overflow: hidden; text-overflow: ellipsis; ${
+                      return `<li style="font-size: 15px; text-align: left; white-space: normal; overflow: hidden; text-overflow: ellipsis; ${
                         invertColors
                           ? "color: yellow; background-color: black;"
                           : "color: black; background-color: white;"
@@ -159,12 +146,17 @@ function showPreview() {
             </ul>
         </div>`;
 
-  // プレビューエリアに出力
   document.getElementById("preview-content").innerHTML = previewContent;
-  document.getElementById("preview-area").style.display = "block";
 
-  // プレビューエリア自体を左寄せに設定
-  document.getElementById("preview-area").style.textAlign = "left";
+  // プレビューエリア全体を中央寄せにする
+  const previewArea = document.getElementById("preview-area");
+  previewArea.style.display = "flex";
+  previewArea.style.justifyContent = "center";
+  previewArea.style.alignItems = "center";
+  previewArea.style.height = "100%";
+  previewArea.style.textAlign = "center";
+
+  previewArea.style.display = "block";
 }
 
 function generatePDF() {
@@ -217,8 +209,14 @@ function generatePDF() {
   html2pdf().from(pdfContent).set(opt).save();
 }
 
+// カラーテーマを反転させるための関数です
 function toggleInvert() {
-  invertColors = !invertColors;
-  updateSetlist(); // セットリストを再描画して色を反映
-  showPreview(); // プレビューを再表示して色を反映
+  invertColors = !invertColors; // 現在の状態を反転
+  updateSetlist(); // セットリストを再描画
+  showPreview(); // プレビューを再表示
 }
+
+// 色反転用ボタンのイベントリスナーを追加
+document
+  .getElementById("toggle-invert")
+  .addEventListener("click", toggleInvert);
