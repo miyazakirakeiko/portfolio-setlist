@@ -82,6 +82,7 @@ function updateSetlist() {
   // SortableJSを初期化
   new Sortable(setlistContainer, {
     animation: 1000,
+    touchStartThreshold: 20,
     onEnd: function (evt) {
       const movedItem = setlist.splice(evt.oldIndex, 1)[0];
       setlist.splice(evt.newIndex, 0, movedItem);
