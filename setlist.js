@@ -6,15 +6,20 @@ let invertColors = false;
 // ドラッグ中のインデックスを保存する変数
 let draggedItemIndex = null;
 
+// ページ全体でid属性がfate-inputのものを探す
+// その要素で「日付が変わったよ」というイベントが起きたら、以下の動作
+// 日付を選んだら、自動的に入力欄からフォーカスが外れる（カーソルが別の場所に移動する）ようになる
 document.getElementById("date-input").addEventListener("change", function () {
   this.blur();
 });
 
 function addSong() {
   const songInput = document.getElementById("song-input");
+  // 要素に入力された値を表すプロパティ
   const song = songInput.value.trim();
   setlist.push({ type: "song", name: song });
   updateSetlist();
+  // ユーザーが曲名を入力した後、入力フィールドを空にして次の入力ができるようにしてい
   songInput.value = "";
 }
 
@@ -26,6 +31,7 @@ function addMC() {
 }
 
 function deleteItem(index) {
+  // setlist 配列の index 番目の要素を1つ削除
   setlist.splice(index, 1);
   updateSetlist();
 }
@@ -41,15 +47,15 @@ function updateSetlist() {
   setlist.forEach((item, index) => {
     const listItem = document.createElement("li");
 
-    // Tailwind CSSクラスを使用してスタイルを設定
+    // Tailwind CSSクラスを使用してスタイルを設定　現状  ease-in-out消してる
     listItem.className = `
       border border-gray-300 
-      rounded-md 
+      rounded-md   
       p-2 
       my-1 
       transition 
-      duration-200 
-      ease-in-out 
+      duration-500 
+    
       hover:shadow-md 
       ${invertColors ? "bg-gray-800 text-white" : "bg-white text-black"}
     `;
