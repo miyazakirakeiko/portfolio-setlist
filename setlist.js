@@ -80,9 +80,11 @@ function updateSetlist() {
   });
 
   // SortableJSを初期化
+  // SortableJSを初期化
   new Sortable(setlistContainer, {
-    animation: 1000,
-    touchStartThreshold: 20,
+    animation: 300, // アニメーションの時間を1000msから300msに変更
+    draggable: "li", // <li>要素をドラッグ可能にする
+    touchStartThreshold: 20, // ドラッグ開始までの閾値を20pxに設定
     onEnd: function (evt) {
       const movedItem = setlist.splice(evt.oldIndex, 1)[0];
       setlist.splice(evt.newIndex, 0, movedItem);
