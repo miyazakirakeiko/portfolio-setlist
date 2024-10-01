@@ -47,7 +47,7 @@ function updateSetlist() {
   setlist.forEach((item, index) => {
     const listItem = document.createElement("li");
 
-    // Tailwind CSSクラスを使用してスタイルを設定　現状  ease-in-out消してる
+    // Tailwind CSSクラスを使用してスタイルを設定
     listItem.className = `
       border border-gray-300 
       rounded-md   
@@ -67,14 +67,12 @@ function updateSetlist() {
       listItem.textContent = item.name; // MCの場合はそのまま
     }
 
-    // 曲がMCでない場合は削除ボタンを追加
-    if (item.type === "song") {
-      const deleteButton = document.createElement("button");
-      deleteButton.textContent = "削除";
-      deleteButton.className = "ml-2 text-red-500 hover:text-red-700";
-      deleteButton.addEventListener("click", () => deleteItem(index)); // indexで削除
-      listItem.appendChild(deleteButton);
-    }
+    // 曲にもMCにも削除ボタンを追加
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "削除";
+    deleteButton.className = "ml-2 text-red-500 hover:text-red-700";
+    deleteButton.addEventListener("click", () => deleteItem(index)); // indexで削除
+    listItem.appendChild(deleteButton);
 
     setlistContainer.appendChild(listItem);
   });
