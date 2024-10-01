@@ -80,11 +80,8 @@ function updateSetlist() {
   });
 
   // SortableJSを初期化
-  // SortableJSを初期化
   new Sortable(setlistContainer, {
-    animation: 300, // アニメーションの時間を1000msから300msに変更
-    draggable: "li", // <li>要素をドラッグ可能にする
-    touchStartThreshold: 20, // ドラッグ開始までの閾値を20pxに設定
+    animation: 1000,
     onEnd: function (evt) {
       const movedItem = setlist.splice(evt.oldIndex, 1)[0];
       setlist.splice(evt.newIndex, 0, movedItem);
@@ -177,6 +174,16 @@ function generatePDF() {
     document.getElementById("date-input").value.trim() || "日付未入力";
   const venueName =
     document.getElementById("venue-name").value.trim() || "会場名未入力";
+
+  // bandNameの文字数に応じたフォントサイズの設定
+  let bandNameFontSize;
+  if (bandName.length >= 16) {
+    bandNameFontSize = "25px"; // 16文字以上は35px
+  } else if (bandName.length >= 11) {
+    bandNameFontSize = "35px"; // 11文字以上16文字未満は40px
+  } else {
+    bandNameFontSize = "48px"; // 10文字以下は48px
+  }
 
   const totalSongs = setlist.filter((item) => item.type === "song").length;
   const fontSize = getFontSizeForPDF(totalSongs);
