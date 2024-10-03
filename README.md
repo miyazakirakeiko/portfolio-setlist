@@ -4,6 +4,8 @@
 シンプルに仕上げました。<br >
 アーティスト、オーディエンスともに楽しめるアプリになります
 <br >
+<img width="700" alt="setlist-top" src="https://github.com/user-attachments/assets/400eb5ac-ed2c-4df8-9989-446ad0eed349">
+
 
 ▪️アーティスト目線<br >
 ・当日のセットリストを作成していない場合、スマホで作成してpdfで出力すればコンビニへ駆け込んで手軽に印刷可能です<br >
