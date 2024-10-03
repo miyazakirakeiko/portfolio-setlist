@@ -20,115 +20,123 @@
   <body>
     <div class="bg-white py-6 sm:py-8 lg:py-12">
       <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-    <div class="mb-10 md:mb-16">
-      <h1
-        class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl"
-      >
-        セットリスト作ろうくん
-      </h1>
-      <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">このアプリではコンサート時、アーティストの足元に置かれている曲目表<br>
-        「セットリスト」を簡単に生成できます。</p>
-    </div>
-    </div>
-    <!-- バンド名、イベント名、日付、会場名の入力　バンド名、イベント名、日付、会場名を入力するためのフィールドをまとめたセクション -->
-    <!-- placeholderは何も入力されていない場合に表示されるテキスト -->
-    <div id="band-info" class="space-y-4 p-6 max-w-md mx-auto">
-      <input
-        type="text"
-        id="band-name"
-        placeholder="バンド名を入力"
-        class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
-      />
-      <input
-        type="text"
-        id="event-name"
-        placeholder="イベント名を入力"
-        class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
-      />
-    
-      <div class="flex items-center">
-        <label for="date-input" class="mr-2">📅</label>
+        <div class="mb-10 md:mb-6">
+          <h1
+            class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl"
+          >
+            セットリスト作ろうくん
+          </h1>
+          <p
+            class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg"
+          >
+            このアプリではコンサート時、アーティストの足元に置かれている曲目表<br />
+            「セットリスト」を簡単に生成できます。
+          </p>
+        </div>
+      </div>
+      <!-- バンド名、イベント名、日付、会場名の入力　バンド名、イベント名、日付、会場名を入力するためのフィールドをまとめたセクション -->
+      <!-- placeholderは何も入力されていない場合に表示されるテキスト -->
+      <div id="band-info" class="space-y-4 p-6 max-w-md mx-auto">
         <input
-          type="date"
-          id="date-input"
+          type="text"
+          id="band-name"
+          placeholder="バンド名を入力"
           class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
-      </div>
-    
-      <input
-        type="text"
-        id="venue-name"
-        placeholder="会場名を入力"
-        class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
-      />
-    </div>
-    
+        <input
+          type="text"
+          id="event-name"
+          placeholder="イベント名を入力"
+          class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
 
-    <!-- 曲名とMCの追加 -->
-    <div id="setlist-form" class="space-y-4 p-6 max-w-md mx-auto">
-      <!-- 曲名やMCの入力と追加ボタンが含まれたフォーム -->
-      <input
-        type="text"
-        id="song-input"
-        placeholder="曲名を入力"
-        class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
-      />
-      <div class="flex space-x-4">
+        <div class="flex items-center">
+          <input
+            type="date"
+            id="date-input"
+            class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+        <input
+          type="text"
+          id="venue-name"
+          placeholder="会場名を入力"
+          class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+
+        <!-- 曲名とMCの追加 -->
+
+        <!-- 曲名やMCの入力と追加ボタンが含まれたフォーム -->
+
+        <!-- w-full幅を100%p-3全体にパディングp 、3 はTailwindのスペーススケールに基づく単位で、約12px
+      border要素に1pxのボーダー（枠線）
+      border-gray-300ボーダーの色gray-300（薄いグレー）
+      rounded要素の角を丸くします。デフォルトでは小さな半径で角を丸めます。
+      focus:outline-none
+      フォーカス時にブラウザが自動的に追加するアウトライン（枠）を表示しない
+      focus:ring-2
+      * フォーカス時に要素の周りに2px幅のリング（外枠）を表示
+      focus:ring-indigo-500
+      * フォーカス時にリングの色をindigo-500（インディゴ色の500番）に設定 -->
+        <input
+          type="text"
+          id="song-input"
+          placeholder="曲名を入力"
+          class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+
+        <div id="setlist-form" class="flex justify-center space-x-4 mt-4">
+          <button
+            onclick="addSong()"
+            class="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            曲を追加
+          </button>
+
+          <button
+            onclick="addMC()"
+            class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+          >
+            MCを追加
+          </button>
+        </div>
+
+        <!-- セットリスト表示 -->
+        <ul id="setlist" class="max-w-md mx-auto"></ul>
+      </div>
+      <!-- ボタン群 -->
+      <div class="flex justify-center space-x-4">
         <button
-          onclick="addSong()"
-          class="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700"
+          onclick="showPreview()"
         >
-          曲を追加
+          プレビューを表示
         </button>
         <button
-          onclick="addMC()"
-          class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+          class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700"
+          onclick="generatePDF()"
         >
-          MCを追加
+          PDF出力
+        </button>
+        <button
+          class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700"
+          onclick="toggleInvert()"
+        >
+          白黒反転
         </button>
       </div>
+
+      <!-- プレビューエリア -->
+      <!-- レビューの内容が表示されるエリア。初期状態ではstyle="display: none"により非表示になっているがプレビューボタンが押されると表示 -->
+      <div id="preview-area" style="display: none">
+        <h2>プレビュー</h2>
+        <div id="preview-content" style="padding: 10px"></div>
+      </div>
+
+      <!-- html2pdf.jsライブラリの読み込み　外部JavaScriptファイルsetlist.jsを読み込んでいます。このファイルには、セットリストの操作やプレビュー、PDF生成などの機能を持つスクリプトが含まれる -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
     </div>
-    
-
-    <!-- セットリスト表示 -->
-    <ul id="setlist" class="max-w-md mx-auto mt-6 space-y-4"></ul>
-
-
-    <!-- ボタン群 -->
-    <div class="flex justify-center space-x-4 mt-4">
-      <button
-        class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700"
-        onclick="showPreview()"
-      >
-        プレビューを表示
-      </button>
-      <button
-        class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700"
-        onclick="generatePDF()"
-      >
-        PDF出力
-      </button>
-      <button
-      class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700"
-      onclick="toggleInvert()"
-    >
-      白黒反転
-    </button>
-    
-    </div>
-    
-
-    <!-- プレビューエリア -->
-    <!-- レビューの内容が表示されるエリア。初期状態ではstyle="display: none"により非表示になっているがプレビューボタンが押されると表示 -->
-    <div id="preview-area" style="display: none">
-      <h2>プレビュー</h2>
-      <div id="preview-content" style="padding: 10px"></div>
-    </div>
-
-    <!-- html2pdf.jsライブラリの読み込み　外部JavaScriptファイルsetlist.jsを読み込んでいます。このファイルには、セットリストの操作やプレビュー、PDF生成などの機能を持つスクリプトが含まれる -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
-
     <!-- setlist.jsファイルを読み込む -->
     <script src="setlist.js"></script>
   </body>

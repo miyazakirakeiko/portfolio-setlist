@@ -59,20 +59,23 @@ function updateSetlist() {
       hover:shadow-md 
       ${invertColors ? "bg-gray-800 text-white" : "bg-white text-black"}
     `;
-
-    if (item.type === "song") {
-      listItem.textContent = `${songCounter}. ${item.name}`;
-      songCounter++; // 曲ごとにカウンタを増やす
-    } else {
-      listItem.textContent = item.name; // MCの場合はそのまま
-    }
-
     // 曲にもMCにも削除ボタンを追加
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "削除";
-    deleteButton.className = "ml-2 text-red-500 hover:text-red-700";
+    deleteButton.className = "mr-2 text-red-500 hover:text-red-700"; // 左に配置するために 'mr-2'（右側にマージン）を使用
     deleteButton.addEventListener("click", () => deleteItem(index)); // indexで削除
+
+    // 削除ボタンを先に追加して左側に配置
     listItem.appendChild(deleteButton);
+
+    if (item.type === "song") {
+      listItem.appendChild(
+        document.createTextNode(`${songCounter}. ${item.name}`)
+      );
+      songCounter++; // 曲ごとにカウンタを増やす
+    } else {
+      listItem.appendChild(document.createTextNode(item.name)); // MCの場合はそのまま
+    }
 
     setlistContainer.appendChild(listItem);
   });
