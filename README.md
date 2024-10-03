@@ -25,7 +25,9 @@
 ▪️ポストアクティビティ（2024/9/25現在）<br >
 ▪️ポストアクティビティ（2024/9/25現在）<br>
 <img width="286" alt="スクリーンショット 2024-10-03 15 54 45" src="https://github.com/user-attachments/assets/246e6aa3-91aa-4839-92dd-314b71c15005" style="vertical-align: top; margin-right: 10px;">
-<img width="277" alt="スクリーンショット 2024-10-03 15 52 07" src="https://github.com/user-attachments/assets/56fb5bf5-aaf3-4f61-b6b8-56d66ab5c07f" style="vertical-align: top;">
+<img width="273" alt="スクリーンショット 2024-10-03 15 59 11" src="https://github.com/user-attachments/assets/cda717eb-d27b-4a9f-90d7-0fbd80b9fca0">
+
+
 
 
 
