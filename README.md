@@ -23,6 +23,7 @@
 ・自分が思う理想のセットリストを仮想で考える遊びが出来ます<br >
 
 ▪️ポストアクティビティ（2024/9/25現在）<br >
+<img width="286" alt="スクリーンショット 2024-10-03 15 54 45" src="https://github.com/user-attachments/assets/246e6aa3-91aa-4839-92dd-314b71c15005">
 <img width="277" alt="スクリーンショット 2024-10-03 15 52 07" src="https://github.com/user-attachments/assets/56fb5bf5-aaf3-4f61-b6b8-56d66ab5c07f">
 
 
