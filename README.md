@@ -23,7 +23,7 @@
 ・自分が思う理想のセットリストを仮想で考える遊びが出来ます<br >
 
 # 実績
-Xでアウトプットの発信後、ありがたいことに30,000を超えるインプレッションを獲得しました。
+
 <img width="286" alt="スクリーンショット 2024-10-03 15 54 45" src="https://github.com/user-attachments/assets/246e6aa3-91aa-4839-92dd-314b71c15005" style="vertical-align: top; margin-right: 10px;">
 <img width="273" alt="スクリーンショット 2024-10-03 15 59 11" src="https://github.com/user-attachments/assets/cda717eb-d27b-4a9f-90d7-0fbd80b9fca0">
 
