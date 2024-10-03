@@ -4,7 +4,8 @@
 シンプルに仕上げました。<br >
 アーティスト、オーディエンスともに楽しめるアプリになります
 <br >
-
+<br >
+<br >
 
 
 <img width="700" alt="setlist-top" src="https://github.com/user-attachments/assets/400eb5ac-ed2c-4df8-9989-446ad0eed349">
