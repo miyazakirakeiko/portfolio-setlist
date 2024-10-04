@@ -47,6 +47,8 @@ https://miyazakirakeiko.github.io/portfolio-setlist/
   - html2pdf.js
 
 # 機能一覧
+<br >
+
 - 曲順入替<br >
 <img width="385" alt="スクリーンショット 2024-10-04 11 09 22" src="https://github.com/user-attachments/assets/d7363e1c-36fc-4d60-b22e-b46dda7ec54f">
 <br >
