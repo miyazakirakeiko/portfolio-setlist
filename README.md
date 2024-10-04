@@ -48,3 +48,8 @@ https://miyazakirakeiko.github.io/portfolio-setlist/
   - html2pdf.js
 
 # 機能一覧
+- 曲・MCの追加・削除
+- 曲順入替
+- プレビュー
+- 白黒反転
+- PDF出力
