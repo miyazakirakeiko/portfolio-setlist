@@ -41,5 +41,10 @@
 https://miyazakirakeiko.github.io/portfolio-setlist/
 
 # 使用技術
+- HTML
+- CSS(Tailwind CSS)
+- JavaScriptライブラリ
+  - Sortable.js
+  - html2pdf.js
 
 # 機能一覧
