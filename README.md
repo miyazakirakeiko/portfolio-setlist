@@ -48,10 +48,13 @@ https://miyazakirakeiko.github.io/portfolio-setlist/
 
 # 機能一覧
 - 曲順入替<br >
-<img width="385" alt="スクリーンショット 2024-10-04 11 09 22" src="https://github.com/user-attachments/assets/d7363e1c-36fc-4d60-b22e-b46dda7ec54f">-----
+<img width="385" alt="スクリーンショット 2024-10-04 11 09 22" src="https://github.com/user-attachments/assets/d7363e1c-36fc-4d60-b22e-b46dda7ec54f">
+<br >
+---
 <br >
 - プレビュー<br >
   <img width="424" alt="スクリーンショット 2024-10-04 11 08 07" src="https://github.com/user-attachments/assets/1a507cf2-9272-4d63-bddb-1b6af13264ae">
+<br >
 ---
 <br >
 - 白黒反転<br >
