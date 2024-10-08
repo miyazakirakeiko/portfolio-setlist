@@ -1,7 +1,6 @@
 # セットリスト作ろうくん
 
-誰でも気軽に作成できるように、認証機能は一切導入せず
-シンプルに仕上げました。<br >
+コンサートの曲目リスト「セットリスト」の作成アプリです。<br >
 アーティスト、オーディエンスともに楽しめるアプリになります
 <br >
 <br >
@@ -59,4 +58,7 @@ ___
 <br >
 ___
 **白黒反転**<br >
-  <img width="330" alt="スクリーンショット 2024-10-04 11 10 19" src="https://github.com/user-attachments/assets/31e0c16d-3c3b-4f68-808b-c7c71925f566"><br >
+  <img width="330" alt="スクリーンショット 2024-10-04 11 10 19" src="https://github.com/user-attachments/assets/31e0c16d-3c3b-4f68-808b-c7c71925f566">
+ <img width="220" alt="スクリーンショット 2024-10-08 18 35 35" src="https://github.com/user-attachments/assets/d85d57b4-479d-46f5-aac7-4fbf091321f8">
+ <img width="235" alt="スクリーンショット 2024-10-08 18 36 06" src="https://github.com/user-attachments/assets/228d61ec-994a-4fd2-8ee1-f8b5f374f67b">
+<br >
