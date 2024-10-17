@@ -23,16 +23,19 @@
 
 # 実績
 
+
+
 <img width="286" alt="スクリーンショット 2024-10-03 15 54 45" src="https://github.com/user-attachments/assets/246e6aa3-91aa-4839-92dd-314b71c15005" style="vertical-align: top; margin-right: 10px;">
 <img width="273" alt="スクリーンショット 2024-10-03 15 59 11" src="https://github.com/user-attachments/assets/cda717eb-d27b-4a9f-90d7-0fbd80b9fca0">
 <br >
 ・30,000インプレッションを達成 https://x.com/miyazakirakeiko/status/1837069965020778917?s=46 <br >
 ・引用にて、ユーザーからの感想を多数いただきました　↓抜粋<br >
-<img width="313" alt="スクリーンショット 2024-10-04 10 31 41" src="https://github.com/user-attachments/assets/abe19b24-535c-419d-8624-8382de7f2cf7">
-<img width="349" alt="スクリーンショット 2024-10-04 10 32 04" src="https://github.com/user-attachments/assets/9abbb374-2d32-4cd3-abb1-c6ffda157487"><br >
-<img width="582" alt="スクリーンショット 2024-10-04 10 32 18" src="https://github.com/user-attachments/assets/0f172242-044c-4221-ac56-7fbe308bb7ec">
-<br >
-<img width="389" alt="スクリーンショット 2024-10-04 10 32 31" src="https://github.com/user-attachments/assets/df89edd8-5dd1-4a8a-93f2-b4e99126f38d">
+
+
+<img width="593" alt="スクリーンショット 2024-10-17 22 55 03" src="https://github.com/user-attachments/assets/c04e1ddd-4c72-4a4f-8d1a-e21ab83c8a71">
+<img width="593" alt="スクリーンショット 2024-10-17 22 55 37" src="https://github.com/user-attachments/assets/c4e29c9f-27f6-4cfc-a00a-6be790c790b1">
+<img width="593" alt="スクリーンショット 2024-10-17 22 56 07" src="https://github.com/user-attachments/assets/c5a2d708-8257-4e00-8028-2dd9a70fa466">
+
 
 
 # URL
